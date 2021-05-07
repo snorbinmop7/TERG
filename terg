@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# To echo output as the script runs, uncomment the next line:
+# set -v
+
+# Toast Email Report Generator (TERG)
+# Written by Brendan BeHanna
+
+# Dependencies:
+# mailutils, postfix with working SMTP, zip
+# aws-cli MUST be configured for the active user with the S3 credentials provided by Toast
+# This script assumes that it lives in the webroot and your reports are in a /reports subdirectory of your webroot
+
+# Toast Store IDs
+# 11111 Alice's Anchovies
+# 22222 Bob's Bistro
+# 33333 Chad's Cafe
+
+# Grab the most up-to-date reports from Toast's S3 and put them in /reports
+aws s3 sync s3://restaurant-exports/[YOUR_SUBDIRECTORY_HERE]/ /var/www/html/reports/
+
+# Switch to /reports to create individual stores' zip files
+cd /var/www/html/reports/
+zip -r AlicesAnchovies.zip 11111/
+zip -r BobsBistro.zip 22222/
+zip -r ChadsCafe.zip 33333/
+
+# Send Alice's Anchovies report
+echo "Good day!" | mail -a "From: Toast Reports <noreply@example.com>" -s "Alice's Anchovies Toast Report" alice@anchovies.com -A AlicesAnchovies.zip
+
+# Send Bob's Bistro report
+echo "Good day!" | mail -a "From: Toast Reports <noreply@example.com>" -s "Bob's Bistro Toast Report" bob@bistro.com -A BobsBistro.zip
+
+# Send Chad's Cafes report
+ echo "Good day!" | mail -a "From: Toast Reports <noreply@example.com>" -s "Chad's Cafe Toast Report" chad@cafe.com -A ChadsCafe.zip
+
+# Switch to /var/www/html, the webroot, to create and send omnibus zip
+cd /var/www/html/
+zip -r reports.zip reports/
+echo "Good day!" | mail -a "From: Toast Reports <noreply@example.com>" -s "Toast Report Roundup" bigboss@example.com -A reports.zip
