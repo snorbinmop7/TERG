@@ -1,7 +1,7 @@
 # TERG
 Toast Email Report Generator
 
-Toast POS's back end is pretty rich in reporting tools, but sometimes you just want raw data, and you want that raw data emailed to you on a regular basis. Toast's Data Export feature solves the first problem and this script solves the second.
+Toast POS's back end is pretty rich in reporting tools, but sometimes you just want raw data, and you want that raw data emailed to you on a regular basis. Toast's Data Export feature solves the first problem and, along with cron, this script solves the second.
 
 Given a working AWS CLI installation, Apache on Ubuntu, and a working Postfix setup, it will probably be plug-and-play with your restaurant IDs. To use a different environment, edit a few paths.
 
