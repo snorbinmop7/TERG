@@ -11,4 +11,3 @@ Given a working AWS CLI installation, Apache on Ubuntu, and a working Postfix se
 - postfix with tested working SMTP settings  
 - mailutils  
 - zip   
-- bash  
