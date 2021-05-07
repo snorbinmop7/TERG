@@ -5,7 +5,7 @@ Toast POS's back end is pretty rich in reporting tools, but sometimes you just w
 Toast's Data Export feature solves the first problem and this script solves the second.
 
 This script does that. Given a working AWS CLI installation, Apache on Ubuntu, and a working Postfix setup,
-it will probably be plug-and-play with your restaurant IDs.
+it will probably be plug-and-play with your restaurant IDs. To use a different environment, edit a few paths.
 
 #### Dependencies:
 aws-cli, configured with the S3 credentials provided to you by Toast  
