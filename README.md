@@ -10,6 +10,5 @@ Given a working AWS CLI installation, Apache on Ubuntu, and a working Postfix se
 - aws-cli, configured with the S3 credentials provided to you by Toast  
 - postfix with tested working SMTP settings  
 - mailutils  
-- zip  
-- apache  
+- zip   
 - bash  
