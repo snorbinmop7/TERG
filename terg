@@ -6,11 +6,6 @@
 # Toast Email Report Generator (TERG)
 # Written by Brendan BeHanna
 
-# Dependencies:
-# mailutils, postfix with working SMTP, zip
-# aws-cli MUST be configured for the active user with the S3 credentials provided by Toast
-# This script assumes that it lives in the webroot and your reports are in a /reports subdirectory of your webroot
-
 # Toast Store IDs
 # 11111 Alice's Anchovies
 # 22222 Bob's Bistro
