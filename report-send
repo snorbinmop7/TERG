@@ -1,0 +1,67 @@
+#!/bin/bash
+set -v
+# New Waterloo Toast Email Report Generator (TERG)
+# Written by Brendan BeHanna
+
+# Dependencies:
+# mailutils, postfix with working SMTP, zip
+# This script MUST be in /var/www/html to work properly
+# aws-cli MUST be configured for the active user with the S3 credentials provided by Toast
+
+# Toast Store IDs
+# 52759 LC
+# 53974 Il Brutto
+# 54408 CNS
+# 54416 Sway03
+# 57773 Goodalls
+# 57786 Manana
+# 57790 Butler
+# 73810 ERC
+# 75634 NW TGGC
+
+# Grab the most up-to-date reports from Toast's S3
+aws s3 sync s3://restaurant-exports/NewWaterlooDataExports/ /var/www/html/reports/
+
+# Switch to /reports to create individual stores' zip files
+cd /var/www/html/reports/
+zip -r LaCondesa.zip 52759/
+zip -r IlBrutto.zip 53974/
+zip -r CNS.zip 54408/
+zip -r Sway03.zip 54416/
+zip -r Goodalls.zip 57773/
+zip -r Manana.zip 57786/
+zip -r Butler.zip 57790/
+zip -r LaReina.zip 73810/
+zip -r NWGC.zip 75634/
+
+# Send LC's report
+echo "Good day!" | mail -a "From: Toast Reports <noreply@newwaterloo.com>" -s "La Condesa Toast Report" jackie.mizkovitz@newwaterloo.com -A LaCondesa.zip
+
+# Send IB's report
+echo "Good day!" | mail -a "From: Toast Reports <noreply@newwaterloo.com>" -s "Il Brutto Toast Report" jackie.miskovitz@newwaterloo.com -A IlBrutto.zip
+
+# Send CNS's report
+# echo "Good day!" | mail -a "From: Toast Reports <noreply@newwaterloo.com>" -s "CNS Toast Report" anthony.kennedy@newwaterloo.com -A CNSold.zip
+
+# Send Sway03's report
+echo "Good day!" | mail -a "From: Toast Reports <noreply@newwaterloo.com>" -s "Sway03 Toast Report" jackie.miskovitz@newwaterloo.com -A Sway03.zip
+
+# Send Goodalls' report
+# echo "Good day!" | mail -a "From: Toast Reports <noreply@newwaterloo.com>" -s "Goodall's Kitchen Toast Report" anthony.kennedy@newwaterloo.com -A Goodalls.zip
+
+# Send Manana's report
+# echo "Good day!" | mail -a "From: Toast Reports <noreply@newwaterloo.com>" -s "Manana Toast Report" anthony.kennedy@newwaterloo.com -A Manana.zip
+
+# Send Butler's report
+# echo "Good day!" | mail -a "From: Toast Reports <noreply@newwaterloo.com>" -s "Butler Toast Report" anthony.kennedy@newwaterloo.com -A Butler.zip
+
+# Send La Reina's report
+# echo "Good day!" | mail -a "From: Toast Reports <noreply@newwaterloo.com>" -s "La Reina Toast Report" anthony.kennedy@newwaterloo.com -A LaReina.zip
+
+# Send NW GC report
+# echo "Good day!" | mail -a "From: Toast Reports <noreply@newwaterloo.com>" -s "NW GC Toast Report" anthony.kennedy@newwaterloo.com -A NWGC.zip
+
+# Switch to /var/www/html to create and send omnibus zip
+cd /var/www/html/
+zip -r reports.zip reports/
+echo "Good day!" | mail -a "From: Toast Reports <noreply@newwaterloo.com>" -s "Toast Report Roundup" it@newwaterloo.com -A reports.zip
