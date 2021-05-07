@@ -6,7 +6,7 @@ Toast POS's back end is pretty rich in reporting tools, but sometimes you just w
 Given a working AWS CLI installation, Apache on Ubuntu, and a working Postfix setup, it will probably be plug-and-play with your restaurant IDs. To use a different environment, edit a few paths.
 
 #### Dependencies:
-this script assumes it's in the webroot
+this script assumes it's in the webroot  
 aws-cli, configured with the S3 credentials provided to you by Toast  
 postfix with tested working SMTP settings  
 mailutils  
